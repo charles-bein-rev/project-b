@@ -53,20 +53,16 @@ public class GameManager {
 			output[0] = temp[0];
 			if (currentRoom.getName().equals("Bedroom") && temp[1].equals("console") && !checkedMessage) {
 				output[1] = "consoleFirstTime";
-				checkedMessage = true;
 			} else if (currentRoom.getName() == "Cargo Bay") {
 				if (temp[1].equals("toolbox") && haveTool) {
 					output[1] = "emptyToolbox";
 				} else if (temp[1].equals("toolbox") && !haveTool) {
 					output[1] = temp[1];
-					haveTool = true;
 				} else if (temp[1].equals("crate") && !movedCrate) {
 					output[1] = temp[1];
-					movedCrate = true;
 				} else if (temp[1].equals("crate") && movedCrate) {
 					output[1] = "movedCrate";
-				}
-				else if (temp[1].equals("hatch") && movedCrate) {
+				} else if (temp[1].equals("hatch") && movedCrate) {
 					output[1] = "hatch";
 				} else if (temp[1].equals("hatch") && !movedCrate) {
 					output[1] = "blockedHatch";
@@ -110,13 +106,17 @@ public class GameManager {
 	private static String parseDirection(String input) {
 		String output = "INVALID";
 
-		if (input.equals("hall") && !currentRoom.getName().equals("Hallway") && !currentRoom.getName().equals("Engine Room")) {
+		if (input.equals("hall") && !currentRoom.getName().equals("Hallway")
+				&& !currentRoom.getName().equals("Engine Room")) {
 			output = "hall";
-		} else if (currentRoom.getName().equals("Hallway") && input.equals("cockpit") || input.equals("bedroom") || input.equals("cargo")) {
+		} else if (currentRoom.getName().equals("Hallway") && input.equals("cockpit") || input.equals("bedroom")
+				|| input.equals("cargo")) {
 			output = input;
-		} else if (currentRoom.getName().equals("Cargo Bay") && input.equals("ladder") || input.equals("hatch") || input.equals("down")) {
+		} else if (currentRoom.getName().equals("Cargo Bay") && input.equals("ladder") || input.equals("hatch")
+				|| input.equals("down")) {
 			output = "engine";
-		} else if (currentRoom.getName().equals("Engine Room") && input.equals("ladder") || input.equals("hatch") || input.equals("up")) {
+		} else if (currentRoom.getName().equals("Engine Room") && input.equals("ladder") || input.equals("hatch")
+				|| input.equals("up")) {
 			output = "cargo";
 		}
 
@@ -193,7 +193,13 @@ public class GameManager {
 		} else {
 			System.out.print("USE " + item.getName().toUpperCase() + ": ");
 			System.out.println(item.getUseText());
-			if (item.getName().toLowerCase().equals("engine") && haveTool) {
+			if (currentRoom.getName().equals("Bedroom") && item.getName().toLowerCase().equals("console") && !checkedMessage) {
+				checkedMessage = true;
+			} else if (item.getName().toLowerCase().equals("toolbox") && !haveTool) {
+				haveTool = true;
+			} else if (item.getName().toLowerCase().equals("crate") && !movedCrate) {
+				movedCrate = true;
+			} else if (item.getName().toLowerCase().equals("engine") && haveTool) {
 				gameOver = true;
 			}
 		}
