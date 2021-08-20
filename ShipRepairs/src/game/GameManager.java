@@ -47,9 +47,6 @@ public class GameManager {
 	}
 
 	private static String[] parseInput(String input) {
-		// TODO
-		System.out.println(movedCrate);
-		System.out.println(haveTool);
 		String[] output = new String[2];
 		String[] temp = input.toLowerCase().split(" ");
 		if (temp[0].equals("look") || temp[0].equals("use")) {
