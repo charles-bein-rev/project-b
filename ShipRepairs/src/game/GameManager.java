@@ -25,6 +25,8 @@ public class GameManager {
 		movedCrate = false;
 		haveTool = false;
 
+		System.out.println("You wake up to the sound of a notification on your console. Looks like sleep will have to wait: you’ve got work to do.\n");
+		
 		gameLoop();
 	}
 
