@@ -50,10 +50,10 @@ public class ItemManager {
 		
 		Interactable cockpitConsole = new Interactable("Console", "The most up-to-date screen on the ship, "
 																	+ "this console has a full-color display. "
-																	+ "It handles navigation, long-range communications, "
+																	+ "It handles navigation, long-range communications, \n"
 																	+ "status reports, and pretty much everything else "
 																	+ "you might need to fly a ship as small as this one.", 
-																	"A message is displayed on the screen: "
+																	"A message is displayed on the screen: \n"
 																	+ "\"Situation Report: Critical error detected with the engine. "
 																	+ "Please correct immediately to resume normal flight. "
 																	+ "Recommend use of standard multitool "
@@ -61,20 +61,20 @@ public class ItemManager {
 		itemList.put("cockpitConsole", cockpitConsole);
 		
 		Interactable window = new Interactable("Window", "It doesn’t matter how long you spend out here, "
-															+ "the views of space never fail to impress. "
+															+ "the views of space never fail to impress.\n"
 															+ "Out the window, you can see a blue-green gas giant, "
-															+ "sitting in front of a brilliant starfield. "
+															+ "sitting in front of a brilliant starfield. \n"
 															+ "You take a moment to take it all in, before getting back to work.", 
 															"It doesn’t matter how long you spend out here, "
-															+ "the views of space never fail to impress. "
+															+ "the views of space never fail to impress.\n"
 															+ "Out the window, you can see a blue-green gas giant, "
-															+ "sitting in front of a brilliant starfield. "
+															+ "sitting in front of a brilliant starfield. \n"
 															+ "You take a moment to take it all in, before getting back to work.");
 		itemList.put("window", window);
 		
 		Interactable toolbox = new Interactable("Toolbox", "A simple red toolbox sits on the workbench. "
 															+ "You’ve had it with you since you first went into space, "
-															+ "and it’s never let you down yet.", 
+															+ "and it’s never let you down so far.", 
 															"You grab your trusty multitool out of the toolbox. "
 															+ "Now you’re ready to fix whatever’s broken.");
 		itemList.put("toolbox", toolbox);
@@ -87,19 +87,19 @@ public class ItemManager {
 		itemList.put("emptyToolbox", emptyToolbox);
 		
 		Interactable crate = new Interactable("Crate", "As always, you don’t have any idea what’s in your cargo, "
-														+ "and you’ll never get to find out. "
+														+ "and you’ll never get to find out. \n"
 														+ "The anti-grav unit built into every crate makes whatever "
-														+ "it is light enough to move when you need to, "
+														+ "it is light enough to move when you need to, \n"
 														+ "and all you need to know is that you’ll get paid once you deliver it.", 
 														"You activate the crate’s anti-grav unit and "
-														+ "lift it back into place on the stack. "
+														+ "lift it back into place on the stack. \n"
 														+ "Turning the anti-grav off, the crate falls into place with a heavy thud, "
 														+ "and you triple-check the restraints before getting back to work.");
 		itemList.put("crate", crate);
 		
 		Interactable movedCrate = new Interactable("Crate", "As always, you don’t have any idea what’s in your cargo, "
 															+ "and you’ll never get to find out. "
-															+ "The anti-grav unit built into every crate makes whatever "
+															+ "The anti-grav unit built into every crate makes whatever \n"
 															+ "it is light enough to move when you need to, "
 															+ "and all you need to know is that you’ll get paid once you deliver it.", 
 															"The crate is already back in place, "
@@ -118,27 +118,27 @@ public class ItemManager {
 		itemList.put("hatch", hatch);
 		
 		Interactable engine = new Interactable("Engine", "What should be the beating heart of the ship "
-															+ "is just a cold mass of metal. Your FTL drive, "
+															+ "is just a cold mass of metal. Your FTL drive, \n"
 															+ "once the height of modern invention, is so old "
-															+ "that it breaks down at least once a year. "
+															+ "that it breaks down at least once a year. \n"
 															+ "Sooner or later, it’s going to give out completely, "
-															+ "leaving you stranded in space. You should really make "
+															+ "leaving you stranded in space. \nYou should really make "
 															+ "a note to look into a new one the next time you’re in port.", 
 															"With a bit of effort, you manage to fix the engine with the multitool. "
-															+ "As it roars back to life, you give a sigh of relief. "
+															+ "As it roars back to life, you give a sigh of relief. \n"
 															+ "You head back to your bunk to get back to sleep. "
-															+ "Only six more months to your destination. "
+															+ "Only six more months to your destination. \n"
 															+ "Hopefully it’ll be smooth sailing the rest of the way.");
 		itemList.put("engine", engine);
 		
 		Interactable engineNoMulti = new Interactable("Engine", "What should be the beating heart of the ship "
-															+ "is just a cold mass of metal. Your FTL drive, "
+															+ "is just a cold mass of metal. Your FTL drive, \n"
 															+ "once the height of modern invention, is so old "
-															+ "that it breaks down at least once a year. "
+															+ "that it breaks down at least once a year. \n"
 															+ "Sooner or later, it’s going to give out completely, "
-															+ "leaving you stranded in space. You should really make "
+															+ "leaving you stranded in space. \nYou should really make \n"
 															+ "a note to look into a new one the next time you’re in port.",
-															"This is definitely the problem, but you forgot to grab your multitool. "
+															"This is definitely the problem, but you forgot to grab your multitool. \n"
 															+ "You’ll have to go back up and get it before you can do any repairs.");
 		itemList.put("engineNoMulti", engineNoMulti);
 		

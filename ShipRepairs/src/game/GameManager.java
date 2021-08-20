@@ -33,8 +33,6 @@ public class GameManager {
 			currentRoom = PlayerManager.getCurrentRoom();
 			displayRoomInfo();
 			String[] command = parseInput(getInput());
-			//TODO: Delete debug
-			System.out.println(command[0] + " " + command[1]);
 			if (Arrays.asList(command).contains("INVALID")) {
 				cantParse();
 			} else {
@@ -51,25 +49,26 @@ public class GameManager {
 	private static String[] parseInput(String input) {
 		String[] output = new String[2];
 		String[] temp = input.toLowerCase().split(" ");
-		//TODO: Delete debug
-		System.out.println(temp[0] + " " + temp[1]);
 		if (temp[0].equals("look") || temp[0].equals("use")) {
 			output[0] = temp[0];
-			if (currentRoom.getName() == "Bedroom" && temp[1] == "console" && !checkedMessage) {
+			if (currentRoom.getName().equals("Bedroom") && temp[1].equals("console") && !checkedMessage) {
 				output[1] = "consoleFirstTime";
 				checkedMessage = true;
 			} else if (currentRoom.getName() == "Cargo Bay") {
-				if (temp[1] == "toolbox" && haveTool) {
+				if (temp[1].equals("toolbox") && haveTool) {
 					output[1] = "emptyToolbox";
-				} else if (temp[1] == "toolbox" && !haveTool) {
+				} else if (temp[1].equals("toolbox") && !haveTool) {
 					output[1] = temp[1];
 					haveTool = true;
-				} else if (temp[1] == "crate" && !movedCrate) {
+				} else if (temp[1].equals("crate") && !movedCrate) {
 					output[1] = temp[1];
 					movedCrate = true;
-				} else if (temp[1] == "hatch" && movedCrate) {
+				} else if (temp[1].equals("crate") && movedCrate) {
 					output[1] = "movedCrate";
-				} else if (temp[1] == "hatch" && !movedCrate) {
+				}
+				else if (temp[1].equals("hatch") && movedCrate) {
+					output[1] = "hatch";
+				} else if (temp[1].equals("hatch") && !movedCrate) {
 					output[1] = "blockedHatch";
 				}
 			} else if (currentRoom.validItem(temp[1])) {
@@ -111,14 +110,13 @@ public class GameManager {
 	private static String parseDirection(String input) {
 		String output = "INVALID";
 
-		if (input == "hall" && currentRoom.getName() != "Hallway" && currentRoom.getName() != "Engine Room") {
+		if (input.equals("hall") && !currentRoom.getName().equals("Hallway") && !currentRoom.getName().equals("Engine Room")) {
 			output = "hall";
-		} else if (currentRoom.getName() == "Hallway" && input == "cockpit" || input == "bedroom"
-				|| input == "engine") {
+		} else if (currentRoom.getName().equals("Hallway") && input.equals("cockpit") || input.equals("bedroom") || input.equals("cargo")) {
 			output = input;
-		} else if (currentRoom.getName() == "Cargo Bay" && input == "ladder" || input == "hatch" || input == "down") {
+		} else if (currentRoom.getName().equals("Cargo Bay") && input.equals("ladder") || input.equals("hatch") || input.equals("down")) {
 			output = "engine";
-		} else if (currentRoom.getName() == "Engine Room" && input == "ladder" || input == "hatch" || input == "up") {
+		} else if (currentRoom.getName().equals("Engine Room") && input.equals("ladder") || input.equals("hatch") || input.equals("up")) {
 			output = "cargo";
 		}
 
@@ -126,24 +124,24 @@ public class GameManager {
 	}
 
 	private static Room parseRoom(String input) {
-		if (input == "port" || input == "starboard" || input == "forward" || input == "aft") {
-			if (currentRoom.getName() == "Hallway") {
+		if (input.equals("port") || input.equals("starboard") || input.equals("forward") || input.equals("aft")) {
+			if (currentRoom.getName().equals("Hallway")) {
 				switch (input) {
 				case "port":
 					return currentRoom.getAdjacentRoom("bedroom");
 				case "starboard":
-					useItem(currentRoom.getItem("door"));
+					useItem(currentRoom.getItem("wc"));
 					return currentRoom;
 				case "forward":
 					return currentRoom.getAdjacentRoom("cockpit");
 				case "aft":
 					return currentRoom.getAdjacentRoom("cargo");
 				}
-			} else if (currentRoom.getName() == "Bedroom" && input == "starboard") {
+			} else if (currentRoom.getName().equals("Bedroom") && input.equals("starboard")) {
 				return currentRoom.getAdjacentRoom("hall");
-			} else if (currentRoom.getName() == "Cockpit" && input == "aft") {
+			} else if (currentRoom.getName().equals("Cockpit") && input.equals("aft")) {
 				return currentRoom.getAdjacentRoom("hall");
-			} else if (currentRoom.getName() == "Cargo Bay" && input == "forward") {
+			} else if (currentRoom.getName().equals("Cargo Bay") && input.equals("forward")) {
 				return currentRoom.getAdjacentRoom("hall");
 			}
 		} else {
@@ -157,6 +155,7 @@ public class GameManager {
 	}
 
 	private static void runCommand(String[] command) {
+		System.out.println();
 		switch (command[0]) {
 		case "look":
 			lookAtItem(currentRoom.getItem(command[1]));
@@ -185,16 +184,16 @@ public class GameManager {
 	}
 
 	private static void useItem(Interactable item) {
-		if (item.getName() == "door" && currentRoom.getName() == "Bedroom") {
+		if (item.getName().toLowerCase().equals("door")) {
 			moveToRoom(currentRoom.getAdjacentRoom("hall"));
-		} else if (item.getName() == "hatch") {
+		} else if (item.getName().toLowerCase().equals("hatch")) {
 			moveToRoom(currentRoom.getAdjacentRoom("engine"));
-		} else if (item.getName() == "ladder") {
+		} else if (item.getName().toLowerCase().equals("ladder")) {
 			moveToRoom(currentRoom.getAdjacentRoom("cargo"));
 		} else {
-			System.out.print("USE" + item.getName().toUpperCase() + ": ");
+			System.out.print("USE " + item.getName().toUpperCase() + ": ");
 			System.out.println(item.getUseText());
-			if (item.getName() == "engine" && haveTool) {
+			if (item.getName().toLowerCase().equals("engine") && haveTool) {
 				gameOver = true;
 			}
 		}
@@ -202,6 +201,6 @@ public class GameManager {
 
 	private static void cantParse() {
 		System.out.println("Sorry, I didn't understand that. Please only use keywords "
-				+ "\"USE,\" \"LOOK,\" and \"GO,\" followed by the item or " + "direction you want to interact with.");
+				+ "\"USE,\" \"LOOK,\" and \"GO,\" followed by the item or " + "direction you want to interact with.\n");
 	}
 }
